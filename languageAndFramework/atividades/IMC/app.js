@@ -24,11 +24,11 @@ function IMCClassification(imc) {
     switch (true) {
         case imc <= 18.5:
             return "\x1b[33mMagreza";
-        case imc >= 18.5 && imc <= 24.9:
+        case imc < 24.9:
             return "\x1b[32mNormal";
-        case imc > 24.9 && imc <= 30:
+        case imc < 30:
             return "\x1b[33mSobrepeso";
-        case imc > 30:
+        case imc >= 30:
             return "\x1b[31mObesidade";
     }
 }
