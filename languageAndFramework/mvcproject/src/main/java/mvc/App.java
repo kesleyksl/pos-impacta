@@ -6,21 +6,18 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
         DecimalFormat df = new DecimalFormat("#.00");
-        System.out.print("Digite o peso em kg: ");
-        double peso = scanner.nextDouble();
+        double peso = capturarValorDoublePositivo("Digite o peso em kg: ");
 
-        System.out.print("Digite a altura em metros: ");
-        double altura = scanner.nextDouble();
+        double altura = capturarValorDoublePositivo("Digite a altura em metros: ");
 
         double imc = calcularIMC(peso, altura);
 
-        System.out.println("O IMC é: " + df.format(imc) + " considerado " + classificaIMC(imc));
+        System.out.println("O IMC é: " + df.format(imc) + "kg/m²" + " considerado " + classificarIMC(imc));
 
     }
 
-    public static String classificaIMC(double imc) {
+    public static String classificarIMC(double imc) {
         if (imc < 18.5) {
             return "Magreza";
         } else if (imc < 25) {
@@ -36,4 +33,19 @@ public class App {
         return peso / (altura * altura);
     }
 
+    public static double capturarValorDoublePositivo(String mensagem) {
+        Scanner scanner = new Scanner(System.in);
+        double valor;
+        do {
+            System.out.print(mensagem);
+            while (!scanner.hasNextDouble()) {
+                System.out.println("Valor digitado não é um valor numérico positivo.");
+                System.out.print(mensagem);
+                scanner.next();
+            }
+            valor = scanner.nextDouble();
+        } while (valor <= 0);
+
+        return valor;
+    }
 }
